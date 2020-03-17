@@ -15,3 +15,5 @@ build
 /docs/
 /.project
 /.pydevproject
+
+examples/openoil_sample_output.nc
