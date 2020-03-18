@@ -15,7 +15,7 @@ jobs:
           command: apt-get update
       - run:
           name: Install packages
-          command: apt-get install -y build-essential gfortran libgeos-dev gdal-bin
+          command: apt-get install -y build-essential gfortran libgeos-dev gdal-bin imagemagick
       - restore_cache:
           key: v2-deps1-{{ checksum "environment.yml" }}
       - run:
