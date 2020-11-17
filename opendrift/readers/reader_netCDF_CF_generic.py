@@ -19,7 +19,7 @@ import pyproj
 import numpy as np
 from netCDF4 import Dataset, MFDataset, num2date
 
-from opendrift.readers.basereader import BaseReader
+from opendrift.readers.basereader import BaseReader, StructuredReader
 
 try:
     import xarray as xr
@@ -74,7 +74,7 @@ def proj_from_CF_dict(c):
     return proj4, proj
 
 
-class Reader(BaseReader):
+class Reader(BaseReader, StructuredReader):
     """
     A reader for `CF-compliant <https://cfconventions.org/>`_ netCDF files. It can take a single file, or a file pattern.
 
@@ -559,7 +559,7 @@ class Reader(BaseReader):
             # TODO: this should be checked
             if self.xmax + self.delta_x >= 360 and variables['x'].max() > 180:
                 variables['x'] -= 360
-                    
+
         variables['time'] = nearestTime
 
         # Rotate any east/north vectors if necessary
