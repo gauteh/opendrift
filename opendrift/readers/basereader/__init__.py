@@ -398,7 +398,7 @@ class BaseReader(Variables):
             rx = np.array([self.xmin, self.xmax])
             ry = np.array([self.ymin, self.ymax])
             data = self.get_variables_derived(variable, self.start_time,
-                                      rx, ry, block=True)
+                                      rx, ry)
             rx, ry = np.meshgrid(data['x'], data['y'])
             rlon, rlat = self.xy2lonlat(rx, ry)
             data[variable] = np.ma.masked_invalid(data[variable])
@@ -448,8 +448,8 @@ class BaseReader(Variables):
         if variables is None:
             variables = self.variables
 
-        if len(self.covers_positions(lon=lon, lat=lat)[0]) == 0:
-            return None
+        # if len(self.covers_positions(lon=lon, lat=lat)[0]) == 0:
+        #     return None
 
         lon = np.atleast_1d(lon)
         lat = np.atleast_1d(lat)
