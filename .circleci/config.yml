@@ -49,6 +49,10 @@ commands:
       - run:
           name: Install requirements
           no_output_timeout: 60m
+          environment:
+            # Limit parallel package extraction to avoid OOM on smaller CI
+            # instances (e.g. forked PR builds without a warm dependency cache).
+            MAMBA_EXTRACT_THREADS: "1"
           command: |
             if [ ! -e /opt/conda/envs/opendrift ]; then
               if [ -v PYTHON_VERSION ]; then
